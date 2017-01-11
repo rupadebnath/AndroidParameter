@@ -12,8 +12,6 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class AlarmClock {
 	
-//Test for alarm clock
-	
 @Test
 public void testLoginFB() throws Exception{
 		
