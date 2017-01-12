@@ -1,4 +1,6 @@
 //Refer- https://developer.android.com/reference/android/support/test/uiautomator/UiSelector.html
+//Used Appium program for start and stop server.
+
 package androidParameter;
 
 import java.net.URL;
@@ -15,7 +17,7 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class AlarmClock {
 	
-	AndroidDriver driver;
+AndroidDriver driver;
 	
 @Test
 

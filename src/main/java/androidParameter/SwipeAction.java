@@ -38,7 +38,7 @@ public class SwipeAction {
 	driver.manage().timeouts().implicitlyWait(60,TimeUnit.SECONDS);
 	
 	driver.findElementByAndroidUIAutomator("new UiSelector().resourceId(\"com.mobeta.android.demodslv:id/activity_title\").text(\"Warp\")").click();
-	WebElement element=driver.findElements(By.id("com.mobeta.android.demodslv:id/drag_handle")).get(0);
+	WebElement element=(WebElement) driver.findElements(By.id("com.mobeta.android.demodslv:id/drag_handle")).get(0);
 	new TouchAction((MobileDriver)driver).longPress(element).moveTo(71,245).release().perform(); //right to left
 }
 }

@@ -12,16 +12,24 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import io.appium.java_client.MobileDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import utility.StartAndStopAppium;
 
 public class DragAndDrop {
 	
+	AndroidDriver driver;
+	
 	@Test
 	public void testLoginFB() throws Exception{
+		
+	StartAndStopAppium.stopAppium();
+		
+	StartAndStopAppium.startAppium();
 			
 	DesiredCapabilities capabilities= new DesiredCapabilities();
 				
@@ -34,14 +42,22 @@ public class DragAndDrop {
 	capabilities.setCapability("appActivity","Launcher");
 	capabilities.setCapability("noReset",false);
 
-	AndroidDriver driver=new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+	driver=new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 
 	driver.manage().timeouts().implicitlyWait(60,TimeUnit.SECONDS);
 	
 	driver.findElementByAndroidUIAutomator("new UiSelector().resourceId(\"com.mobeta.android.demodslv:id/activity_title\").text(\"Warp\")").click();
-	WebElement element1=driver.findElements(By.id("com.mobeta.android.demodslv:id/drag_handle")).get(0);
-	WebElement element2=driver.findElements(By.id("com.mobeta.android.demodslv:id/drag_handle")).get(3);
+	//WebElement element1=driver.findElements(By.id("com.mobeta.android.demodslv:id/drag_handle")).get(0);
+	//WebElement element2=driver.findElements(By.id("com.mobeta.android.demodslv:id/drag_handle")).get(3);
+	WebElement element1=(WebElement) driver.findElements(By.id("com.mobeta.android.demodslv:id/drag_handle")).get(0);
+    WebElement element2=(WebElement) driver.findElements(By.id("com.mobeta.android.demodslv:id/drag_handle")).get(3);
 	new TouchAction((MobileDriver)driver).longPress(element1).moveTo(element2).release().perform();
 	Thread.sleep(2000);
 	}
+	
+	@AfterMethod
+	public void close(){
+	driver.quit();
+	StartAndStopAppium.stopAppium();
+}
 }
